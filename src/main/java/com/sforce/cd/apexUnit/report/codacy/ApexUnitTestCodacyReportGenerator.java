@@ -52,7 +52,7 @@ public class ApexUnitTestCodacyReportGenerator {
 				JSONObject coveredLines = new JSONObject();
 				
 				for (ApexClassCodeCoverageBean cov : apexClassCodeCoverageBeans) {
-					if (cov.getApexTestClassID() == clazzCoverage.getApexClassId()) {
+					if (cov.getApexTestClassID().equals(clazzCoverage.getApexClassId())) {
 						clazz.put("total", cov.getCoveragePercentage());
 						for (long lineNumber : cov.getCoveredLinesList()) {
 							coveredLines.put(String.valueOf(lineNumber), 1);
