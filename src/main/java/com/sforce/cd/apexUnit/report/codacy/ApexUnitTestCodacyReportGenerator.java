@@ -47,6 +47,7 @@ public class ApexUnitTestCodacyReportGenerator {
 				JSONObject clazz = new JSONObject();
 				clazz.put("filename", "src/classes/" + clazzCoverage.getApexClassName() + ".cls");
 				clazz.put("total", 20);
+				clazz.put("coverage", new JSONObject());
 				clazzesCoverage.add(clazz);
 			}
 
