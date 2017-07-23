@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import com.sforce.cd.apexUnit.ApexUnitUtils;
 import com.sforce.cd.apexUnit.report.ApexClassCodeCoverageBean;
-import com.sforce.cd.apexUnit.report.ApexReportBean;
 import com.sforce.cd.apexUnit.report.ApexUnitCodeCoverageResults;
 
 public class ApexUnitTestCodacyReportGenerator {
@@ -53,7 +52,7 @@ public class ApexUnitTestCodacyReportGenerator {
 				clazz.put("filename", "src/classes/" + clazzCoverage.getApexClassName() + ".cls");
 				
 				JSONObject coveredLines = new JSONObject();
-				clazz.put("total", clazzCoverage.getCoveragePercentage());
+				clazz.put("total", Math.round(clazzCoverage.getCoveragePercentage()));
 				
 				if (clazzCoverage.getCoveredLinesList() != null) {
 					for (long lineNumber : clazzCoverage.getCoveredLinesList()) {
