@@ -58,6 +58,7 @@ public class ApexUnitTestCodacyReportGenerator {
 				file.write(obj.toJSONString());
 				System.out.println("Successfully Copied JSON Object to File...");
 				System.out.println("\nJSON Object: " + obj);
+				file.close();
 			} catch(Exception ex) {
 				LOG.error(ex.getMessage());
 			}
