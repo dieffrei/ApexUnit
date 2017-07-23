@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.sforce.cd.apexUnit.ApexUnitUtils;
+import com.sforce.cd.apexUnit.report.ApexClassCodeCoverageBean;
 import com.sforce.cd.apexUnit.report.ApexReportBean;
 import com.sforce.cd.apexUnit.report.ApexUnitCodeCoverageResults;
 
@@ -31,11 +32,12 @@ public class ApexUnitTestCodacyReportGenerator {
 	 * Generates a JUnit/Jenkins compliant test report in XML for the given job.
 	 * 
 	 * @param reportBeans
+	 * @param apexClassCodeCoverageBeans 
 	 * @param reportFile
 	 *            of the job whose test report is to be generated
 	 * 
 	 */
-	public static void generateTestReport(ApexReportBean[] reportBeans, String reportFile) {
+	public static void generateTestReport(ApexReportBean[] reportBeans, ApexClassCodeCoverageBean[] apexClassCodeCoverageBeans, String reportFile) {
 		if (reportBeans != null && reportBeans.length > 0) {
 			
 			JSONObject obj = new JSONObject();
@@ -46,8 +48,21 @@ public class ApexUnitTestCodacyReportGenerator {
 			for (ApexReportBean clazzCoverage : reportBeans) {
 				JSONObject clazz = new JSONObject();
 				clazz.put("filename", "src/classes/" + clazzCoverage.getApexClassName() + ".cls");
-				clazz.put("total", 20);
-				clazz.put("coverage", new JSONObject());
+				
+				JSONObject coveredLines = new JSONObject();
+				
+				for (ApexClassCodeCoverageBean cov : apexClassCodeCoverageBeans) {
+					if (cov.getApexTestClassID() == clazzCoverage.getApexClassId()) {
+						clazz.put("total", cov.getCoveragePercentage());
+						for (long lineNumber : cov.getCoveredLinesList()) {
+							coveredLines.put(String.valueOf(lineNumber), 1);
+						}
+						
+					}
+				}
+
+				clazz.put("coverage", coveredLines);
+
 				clazzesCoverage.add(clazz);
 			}
 
