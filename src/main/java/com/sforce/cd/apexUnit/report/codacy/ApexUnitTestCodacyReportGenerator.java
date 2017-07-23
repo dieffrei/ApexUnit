@@ -46,14 +46,21 @@ public class ApexUnitTestCodacyReportGenerator {
 			ArrayList<JSONObject> clazzesCoverage = new ArrayList<JSONObject>(); 
 			
 			for (ApexClassCodeCoverageBean clazzCoverage : apexClassCodeCoverageBeans) {
+				
+				LOG.info("clazzCoverage "  + clazzCoverage);
+				
 				JSONObject clazz = new JSONObject();
 				clazz.put("filename", "src/classes/" + clazzCoverage.getApexClassName() + ".cls");
 				
 				JSONObject coveredLines = new JSONObject();
 				clazz.put("total", clazzCoverage.getCoveragePercentage());
-				for (long lineNumber : clazzCoverage.getCoveredLinesList()) {
-					coveredLines.put(String.valueOf(lineNumber), 1);
+				
+				if (clazzCoverage.getCoveredLinesList() != null) {
+					for (long lineNumber : clazzCoverage.getCoveredLinesList()) {
+						coveredLines.put(String.valueOf(lineNumber), 1);
+					}
 				}
+				
 				clazz.put("coverage", coveredLines);
 
 				clazzesCoverage.add(clazz);
