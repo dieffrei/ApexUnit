@@ -59,7 +59,7 @@ public class ApexUnitTestCodacyReportGenerator {
 				System.out.println("Successfully Copied JSON Object to File...");
 				System.out.println("\nJSON Object: " + obj);
 			} catch(Exception ex) {
-				
+				LOG.error(ex.getMessage());
 			}
 			
 		} else {
