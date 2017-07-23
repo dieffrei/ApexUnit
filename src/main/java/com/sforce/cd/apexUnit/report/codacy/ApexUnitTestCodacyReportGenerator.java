@@ -16,7 +16,6 @@ package com.sforce.cd.apexUnit.report.codacy;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

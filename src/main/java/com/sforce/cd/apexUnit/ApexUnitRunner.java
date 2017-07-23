@@ -38,6 +38,7 @@ import com.sforce.cd.apexUnit.report.ApexClassCodeCoverageBean;
 import com.sforce.cd.apexUnit.report.ApexCodeCoverageReportGenerator;
 import com.sforce.cd.apexUnit.report.ApexReportBean;
 import com.sforce.cd.apexUnit.report.ApexUnitTestReportGenerator;
+import com.sforce.cd.apexUnit.report.codacy.ApexUnitTestCodacyReportGenerator;
 import com.sforce.cd.apexUnit.report.ApexUnitCodeCoverageResults;
 
 public class ApexUnitRunner {
@@ -105,6 +106,7 @@ public class ApexUnitRunner {
 			LOG.info("Total test methods executed: " + apexReportBeans.length);
 			String reportFile = "ApexUnitReport.xml";
 			ApexUnitTestReportGenerator.generateTestReport(apexReportBeans, reportFile);
+			ApexUnitTestCodacyReportGenerator.generateTestReport(apexReportBeans, reportFile);			
 		} else {
 			ApexUnitUtils.shutDownWithErrMsg("Unable to generate test report. "
 											 + "Did not find any test results for the job id");
