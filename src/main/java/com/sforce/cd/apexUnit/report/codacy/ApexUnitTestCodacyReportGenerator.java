@@ -37,7 +37,7 @@ public class ApexUnitTestCodacyReportGenerator {
 	 *            of the job whose test report is to be generated
 	 * 
 	 */
-	public static void generateTestReport(ApexClassCodeCoverageBean[] apexClassCodeCoverageBeans, String reportFile) {
+	public static void generateTestReport(ApexClassCodeCoverageBean[] apexClassCodeCoverageBeans) {
 		if (apexClassCodeCoverageBeans != null && apexClassCodeCoverageBeans.length > 0) {
 			
 			JSONObject obj = new JSONObject();
