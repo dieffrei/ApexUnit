@@ -37,30 +37,23 @@ public class ApexUnitTestCodacyReportGenerator {
 	 *            of the job whose test report is to be generated
 	 * 
 	 */
-	public static void generateTestReport(ApexReportBean[] reportBeans, ApexClassCodeCoverageBean[] apexClassCodeCoverageBeans, String reportFile) {
-		if (reportBeans != null && reportBeans.length > 0) {
+	public static void generateTestReport(ApexClassCodeCoverageBean[] apexClassCodeCoverageBeans, String reportFile) {
+		if (apexClassCodeCoverageBeans != null && apexClassCodeCoverageBeans.length > 0) {
 			
 			JSONObject obj = new JSONObject();
 			obj.put("total", ApexUnitCodeCoverageResults.orgWideCodeCoverage);
 			
 			ArrayList<JSONObject> clazzesCoverage = new ArrayList<JSONObject>(); 
 			
-			for (ApexReportBean clazzCoverage : reportBeans) {
+			for (ApexClassCodeCoverageBean clazzCoverage : apexClassCodeCoverageBeans) {
 				JSONObject clazz = new JSONObject();
 				clazz.put("filename", "src/classes/" + clazzCoverage.getApexClassName() + ".cls");
 				
 				JSONObject coveredLines = new JSONObject();
-				
-				for (ApexClassCodeCoverageBean cov : apexClassCodeCoverageBeans) {
-					if (cov.getApexTestClassID().equals(clazzCoverage.getApexClassId())) {
-						clazz.put("total", cov.getCoveragePercentage());
-						for (long lineNumber : cov.getCoveredLinesList()) {
-							coveredLines.put(String.valueOf(lineNumber), 1);
-						}
-						
-					}
+				clazz.put("total", clazzCoverage.getCoveragePercentage());
+				for (long lineNumber : clazzCoverage.getCoveredLinesList()) {
+					coveredLines.put(String.valueOf(lineNumber), 1);
 				}
-
 				clazz.put("coverage", coveredLines);
 
 				clazzesCoverage.add(clazz);
