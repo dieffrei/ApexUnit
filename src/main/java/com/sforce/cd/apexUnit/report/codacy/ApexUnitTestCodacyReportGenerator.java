@@ -47,14 +47,14 @@ public class ApexUnitTestCodacyReportGenerator {
 			for (ApexReportBean clazzCoverage : reportBeans) {
 				JSONObject clazz = new JSONObject();
 				clazz.put("filename", "src/classes/" + clazzCoverage.getApexClassName() + ".cls");
-				clazz.put("total", clazzCoverage.getPassedTestsCount());
+				clazz.put("total", 20);
 				clazzesCoverage.add(clazz);
 			}
 
 			obj.put("fileReports", clazzesCoverage);
 			
 			try {
-				FileWriter file = new FileWriter(reportFile);				
+				FileWriter file = new FileWriter("codacy-coverage.json");				
 				file.write(obj.toJSONString());
 				System.out.println("Successfully Copied JSON Object to File...");
 				System.out.println("\nJSON Object: " + obj);
