@@ -40,7 +40,7 @@ public class ApexUnitTestCodacyReportGenerator {
 		if (apexClassCodeCoverageBeans != null && apexClassCodeCoverageBeans.length > 0) {
 			
 			JSONObject obj = new JSONObject();
-			obj.put("total", ApexUnitCodeCoverageResults.orgWideCodeCoverage);
+			obj.put("total", ApexUnitCodeCoverageResults.teamCodeCoverage);
 			
 			ArrayList<JSONObject> clazzesCoverage = new ArrayList<JSONObject>(); 
 			
